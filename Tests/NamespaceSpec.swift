@@ -58,8 +58,10 @@ final class NamespaceSpec: QuickSpec {
                 expect { try namespace.addExperiment(name: "experimentA", definition: expDef, segmentCount: 10) }.notTo(throwError())
             
                 expect { try namespace.assignIfNeeded() }.notTo(throwError())
+            }
+            
+            it("has to be able to throw error when duplicate experiment is found.") {
                 
-                // TODO add failure if duplicate experiment found.
             }
         }
     }
