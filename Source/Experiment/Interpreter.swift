@@ -27,12 +27,65 @@ final class Interpreter {
     /// This value is accessible through getParams() method, which will force the interpreter to evaluate experiment script in case if it is not yet evaluated.
     private var data: [String: Any]
 
-    /// Indicates whether the interpreter has finished evaluating the value.
-    private var evaluated: Bool = false
+    /// Indicates the interpreter's evaluation state.
+    private var state: EvaluationState = .unevaluated
 
     /// Flag to indicate whether or not the exposure should be logged.
     private(set) var shouldLogExposure: Bool = true
 
+    // MARK: Initialization
+
+    init(serialization: [String: Any] = [:], salt: String = "", unit: Unit = Unit()) {
+        self.serialization = serialization
+        experimentSalt = salt
+
+        // merge inputs variable with unit's identifier for later use by random operators.
+        self.inputs = unit.inputs.merging([PlanOutOperation.Keys.unit.rawValue: unit.identifier]) { current, _ in current }
+        self.overrides = unit.overrides
+
+        // by default store overridden values as parameters, if any.
+        data = overrides
+    }
+
+    // MARK: Evaluation
+
+    /// Evaluates the experiment script.
+    ///
+    /// This operation mutates the `data` variable for every assignment operators made through PlanOutOperation.Set.
+    ///
+    /// - Note:
+    /// - The interpreter will only evaluate the script once (per interpreter instance). This is checked through the `evaluated` boolean flag.
+    /// - The script can arbitrarily throw OperationError.stop which is intentional and should be passed through. The stop signal contains a boolean value that defines whether the current experiment evaluation should be logged or not.
+    ///
+    /// This logging decision will later be processed by the Experiment class when the exposure is logged.
+    /// - Throws: OperationError
+    func evaluateExperiment() throws {
+        guard state == .unevaluated else { return }
+
+        // update the current state to evaluating, to prevent infinite loop.
+        // during evaluation, operators can access the interpreter (i.e. PlanOutOpContext)'s params through get and set method.
+        // without the .evaluating state, this access would cause the interpreter to perform another evaluation for the operator.
+        state = .evaluating
+
+        do {
+            try evaluate(serialization)
+        } catch OperationError.stop(let shouldLogExposure) {
+            // Stop operators contain boolean values that control whether the unit's exposure result should be logged.
+            // Generally, OperationError.stop is expected as it's a mechanism for PlanOut script to do "premature exit" – i.e. preventing the interpreter from evaluating further.
+            self.shouldLogExposure = shouldLogExposure
+        } catch let error {
+            // For errors other than OperationError.stop, mark the interpreter state as error.
+            // This provides clarity if (for example future methods), want to do certain operations depending on whether the interpreter has evaluated the operation successfully, or whether it encountered an error.
+            state = .error
+            throw error
+        }
+
+        // if the evaluation process completed without error, then mark the interpreter state as evaluated.
+        state = .evaluated
+    }
+}
+
+extension Interpreter {
     /// List of reserved names that are separate from the data variable.
     ///
     /// The raw value definitions follow PlanOut interpreter's implementation in Python, as these are probably used (and hardcoded) in the PlanOut compiler as standardized names to get/set these reserved values.
@@ -47,40 +100,20 @@ final class Interpreter {
         case experimentSalt = "experiment_salt"
     }
 
-    init(serialization: [String: Any] = [:], salt: String = "", unit: Unit = Unit()) {
-        self.serialization = serialization
-        experimentSalt = salt
 
-        // merge inputs variable with unit's identifier for later use by random operators.
-        self.inputs = unit.inputs.merging([PlanOutOperation.Keys.unit.rawValue: unit.identifier]) { current, _ in current }
-        self.overrides = unit.overrides
+    /// Indicates the evaluation state of the Interpreter.
+    private enum EvaluationState {
+        /// The interpreter has not evaluated the experiment yet.
+        case unevaluated
 
-        // by default store overridden values as parameters, if any.
-        data = overrides
-    }
+        /// The interpreter is evaluating the experiment.
+        case evaluating
 
-    /// Evaluates the experiment script.
-    ///
-    /// This operation mutates the `data` variable for every assignment operators made through PlanOutOperation.Set.
-    ///
-    /// - Note:
-    /// - The interpreter will only evaluate the script once (per interpreter instance). This is checked through the `evaluated` boolean flag.
-    /// - The script can arbitrarily throw OperationError.stop which is intentional and should be passed through. The stop signal contains a boolean value that defines whether the current experiment evaluation should be logged or not.
-    ///
-    /// This logging decision will later be processed by the Experiment class when the exposure is logged.
-    /// - Throws: OperationError
-    func evaluateExperiment() throws {
-        if evaluated { return }
+        /// The interpreter has finished evaluating the experiment.
+        case evaluated
 
-        do {
-            try evaluate(serialization)
-        } catch OperationError.stop(let shouldLogExposure) {
-            self.shouldLogExposure = shouldLogExposure
-        } catch let error {
-            throw error
-        }
-
-        evaluated = true
+        /// The interpreter encountered error while evaluating the experiment
+        case error
     }
 }
 
