@@ -24,53 +24,43 @@ final class GetSpec: QuickSpec {
                 }
 
                 it("should not throw if the variable value is string type") {
-                    let name: [Any] = [1, 2, 3]
+                    let name = "foo"
                     let args: [String: Any] = [PlanOutOperation.Keys.variable.rawValue: name]
                     let ctx = SimpleMockContext()
-                    var result: Any?
 
-                    expect { result = try op.execute(args, ctx) }.toNot(throwError())
-                    expect(result).to(beNil())
+                    expect { try op.execute(args, ctx) }.toNot(throwError())
                 }
 
-                it("returns nil if the variable argument is array type") {
+                it("throws error if the variable argument is array type") {
                     let name = [1, 2, 3]
                     let args: [String: Any] = [PlanOutOperation.Keys.variable.rawValue: name]
                     let ctx = SimpleMockContext()
-                    var result: Any?
 
-                    expect { result = try op.execute(args, ctx) }.toNot(throwError())
-                    expect(result).to(beNil())
+                    expect { try op.execute(args, ctx) }.to(throwError(errorType: OperationError.self))
                 }
 
                 it("returns nil if the variable argument is numeric type") {
                     let name = 12.5
                     let args: [String: Any] = [PlanOutOperation.Keys.variable.rawValue: name]
                     let ctx = SimpleMockContext()
-                    var result: Any?
 
-                    expect { result = try op.execute(args, ctx) }.toNot(throwError())
-                    expect(result).to(beNil())
+                    expect { try op.execute(args, ctx) }.to(throwError(errorType: OperationError.self))
                 }
 
                 it("returns nil if the variable argument is boolean type") {
                     let name = false
                     let args: [String: Any] = [PlanOutOperation.Keys.variable.rawValue: name]
                     let ctx = SimpleMockContext()
-                    var result: Any?
 
-                    expect { result = try op.execute(args, ctx) }.toNot(throwError())
-                    expect(result).to(beNil())
+                    expect { try op.execute(args, ctx) }.to(throwError(errorType: OperationError.self))
                 }
 
                 it("returns nil if the variable argument is dictionary type") {
                     let name = ["foo": 2]
                     let args: [String: Any] = [PlanOutOperation.Keys.variable.rawValue: name]
                     let ctx = SimpleMockContext()
-                    var result: Any?
 
-                    expect { result = try op.execute(args, ctx) }.toNot(throwError())
-                    expect(result).to(beNil())
+                    expect { try op.execute(args, ctx) }.to(throwError(errorType: OperationError.self))
                 }
 
                 it("returns nil if the variable argument is non literal type") {
@@ -78,10 +68,8 @@ final class GetSpec: QuickSpec {
                     let name = Foo()
                     let args: [String: Any] = [PlanOutOperation.Keys.variable.rawValue: name]
                     let ctx = SimpleMockContext()
-                    var result: Any?
 
-                    expect { result = try op.execute(args, ctx) }.toNot(throwError())
-                    expect(result).to(beNil())
+                    expect { try op.execute(args, ctx) }.to(throwError(errorType: OperationError.self))
                 }
             }
 
