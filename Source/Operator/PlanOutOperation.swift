@@ -137,6 +137,7 @@ extension PlanOutOperation {
         case values
         case left
         case right
+        case conditions = "cond"
         case ifCondition = "if"
         case thenCondition = "then"
         case sequence = "seq"
