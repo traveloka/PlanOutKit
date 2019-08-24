@@ -101,6 +101,21 @@ final class DefaultSegmentAllocatorSpec: QuickSpec {
                         expect { try allocator.allocate("x", 5) }.to(throwError(errorType: SegmentAllocationError.self))
                     }
                 }
+
+                context("when given the same inputs") {
+                    it("always allocates to the same segments") {
+                        var segments: [[Int]] = []
+
+                        for _ in (0..<3) {
+                            var allocator = DefaultSegmentAllocator(totalSegments: 10)
+                            segments.append(try! allocator.allocate("foo", 3))
+                        }
+
+                        // all segments should have the same elements.
+                        expect(segments[0]) == segments[1]
+                        expect(segments[1]) == segments[2]
+                    }
+                }
             }
 
             describe("Identifier mapping") {

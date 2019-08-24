@@ -52,7 +52,7 @@ extension DefaultSegmentAllocator: SegmentAllocator {
     @discardableResult
     mutating func allocate(_ name: String, _ segmentCount: Int) throws -> [Int] {
         // get randomized segment values based on name parameter.
-        guard let segments = sampler(Array(availableSegmentPool), segmentCount, name) as? [Int] else {
+        guard let segments = sampler(Array(availableSegmentPool).sorted(), segmentCount, name) as? [Int] else {
             throw SegmentAllocationError.samplingError
         }
 
