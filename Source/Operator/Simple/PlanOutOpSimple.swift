@@ -25,7 +25,10 @@ extension PlanOutOpSimple {
         // evaluate all arguments first.
         var evaluatedArgs: [String: Any] = [:]
         try args.forEach { key, value in
-            evaluatedArgs[key] = try context.evaluate(value)
+            // use updateValue instead of setting the value through subscripting.
+            // when dealing with nil values, setting the value through subscripting will remove the key instead of preserving nil values for that key.
+            let evaluatedValue = try context.evaluate(value) as Any
+            evaluatedArgs.updateValue(evaluatedValue, forKey: key)
         }
 
         return try simpleExecute(evaluatedArgs, context)
