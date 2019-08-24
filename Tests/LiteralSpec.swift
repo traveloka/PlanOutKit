@@ -340,13 +340,13 @@ final class LiteralSpec: QuickSpec {
                     }
                 }
                 context("when comparing non-literals") {
-                    it("always evaluates to false regardless of actual contents") {
+                    it("always evaluates to true regardless of actual contents") {
                         let a = Literal(Foo())
                         let b = Literal([1: 2])
 
-                        expect(a == b) == false
-                        expect(a == a) == false
-                        expect(b == b) == false
+                        expect(a == b) == true
+                        expect(a == a) == true
+                        expect(b == b) == true
                     }
                 }
             }
@@ -392,6 +392,16 @@ final class LiteralSpec: QuickSpec {
                         expect { jsonData = try JSONEncoder().encode(Literal(value)) }.toNot(throwError())
                         expect(jsonData!).to(equal(valueData))
                     }
+
+                    it("should be able to handle nil entries") {
+                        let value: [String: [Int?]] = ["data": [1, 2, nil, 4]]
+                        let valueData = try! JSONEncoder().encode(value)
+                        var jsonData: Data?
+
+                        expect { jsonData = try JSONEncoder().encode(Literal(value)) }.toNot(throwError())
+                        expect(jsonData!).to(equal(valueData))
+
+                    }
                 }
                 context("when encoding dictionary literals") {
                     it("produces the same output as the directly encoded raw value") {
@@ -407,6 +417,16 @@ final class LiteralSpec: QuickSpec {
                         let value: [String: Any] = ["data": Foo()]
 
                         expect { try JSONEncoder().encode(Literal(value)) }.to(throwError(errorType: OperationError.self))
+                    }
+
+                    it("should be able to handle nil entries") {
+                        let value: [String: [String: Int?]] = ["data": ["foo": 1, "bar": nil, "baz": 2]]
+                        var jsonData: Data?
+
+                        expect { jsonData = try JSONEncoder().encode(Literal(value)) }.toNot(throwError())
+
+                        let data = try! JSONSerialization.jsonObject(with: jsonData!) as! [String: [String: Int?]]
+                        expect(data) == value
                     }
                 }
 

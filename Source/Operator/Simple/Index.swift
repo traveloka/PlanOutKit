@@ -34,7 +34,7 @@ extension PlanOutOperation {
                 guard let index = indexValue as? String else {
                     return nil
                 }
-                return dictionaryValue[index]
+                return dictionaryValue[index] ?? nil
 
             default:
                 throw OperationError.typeMismatch(expected: "base value to be Array or Dictionary", got: String(describing: self))
