@@ -11,8 +11,12 @@ protocol PlanOutOpComparison: PlanOutOpBinary where ResultType == Bool {
 }
 
 extension PlanOutOpComparison {
-    func binaryExecute(left: Literal, right: Literal) throws -> Bool? {
-        switch (left, right) {
+    func binaryExecute(left: Any?, right: Any?) throws -> Bool? {
+        guard let someLeft = left, let someRight = right else {
+            throw OperationError.invalidArgs(expected: "Nonnull value", got: "left: \(String(describing: left)), right: \(String(describing: right))")
+        }
+
+        switch (Literal(someLeft), Literal(someRight)) {
         case (.string(let leftValue), .string(let rightValue)):
             return comparisonExecute(left: leftValue, right: rightValue)
 

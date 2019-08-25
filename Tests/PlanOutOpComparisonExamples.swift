@@ -21,6 +21,7 @@ final class PlanOutOpComparisonSharedExamplesConfiguration: QuickConfiguration {
 
             itBehavesLike(SharedBehavior.binaryOperator.rawValue) { [SharedBehavior.Keys.op.rawValue: op] }
 
+
             it("should not throw errors for arguments with numeric types") {
                 let leftValue = 1
                 let rightValue = 1
@@ -41,6 +42,39 @@ final class PlanOutOpComparisonSharedExamplesConfiguration: QuickConfiguration {
                 ]
 
                 expect { try op.executeOp(args: args, context: Interpreter()) }.toNot(throwError())
+            }
+
+            it("throws error when left argument is nil") {
+                let leftValue: Any? = nil
+                let rightValue = 1
+                let args: [String: Any] = [
+                    PlanOutOperation.Keys.left.rawValue: leftValue as Any,
+                    PlanOutOperation.Keys.right.rawValue: rightValue
+                ]
+
+                expect { try op.executeOp(args: args, context: Interpreter()) }.to(throwError(errorType: OperationError.self))
+            }
+
+            it("throws error when right argument is nil") {
+                let leftValue = 1
+                let rightValue: Any? = nil
+                let args: [String: Any] = [
+                    PlanOutOperation.Keys.left.rawValue: leftValue,
+                    PlanOutOperation.Keys.right.rawValue: rightValue as Any
+                ]
+
+                expect { try op.executeOp(args: args, context: Interpreter()) }.to(throwError(errorType: OperationError.self))
+            }
+
+            it("throws error when both arguments are nil") {
+                let leftValue: Any? = nil
+                let rightValue: Any? = nil
+                let args: [String: Any] = [
+                    PlanOutOperation.Keys.left.rawValue: leftValue as Any,
+                    PlanOutOperation.Keys.right.rawValue: rightValue as Any
+                ]
+
+                expect { try op.executeOp(args: args, context: Interpreter()) }.to(throwError(errorType: OperationError.self))
             }
 
             it("throws error for arguments with array types") {
