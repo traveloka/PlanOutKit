@@ -36,6 +36,13 @@ final class NegativeSpec: QuickSpec {
                 expect { result = try op.execute(args, Interpreter()) }.toNot(throwError())
                 expect(result!).to(equal(300.0))
             }
+
+            it("throws when given nil values") {
+                let value: Any? = nil
+                let args: [String: Any] = [PlanOutOperation.Keys.value.rawValue: value as Any]
+
+                expect { try op.execute(args, Interpreter()) }.to(throwError(errorType: OperationError.self))
+            }
         }
     }
 }

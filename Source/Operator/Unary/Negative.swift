@@ -11,9 +11,13 @@ extension PlanOutOperation {
     final class Negative: PlanOutOpUnary {
         typealias ResultType = Double
 
-        func unaryExecute(_ value: Any) throws -> Double? {
-            guard case let Literal.number(numericValue) = Literal(value) else {
-                throw OperationError.typeMismatch(expected: "Numeric", got: String(describing: value))
+        func unaryExecute(_ value: Any?) throws -> Double? {
+            guard let someValue = value else {
+                throw OperationError.typeMismatch(expected: "Numeric", got: "nil")
+            }
+
+            guard case let Literal.number(numericValue) = Literal(someValue) else {
+                throw OperationError.typeMismatch(expected: "Numeric", got: String(describing: someValue))
             }
 
             return 0 - numericValue

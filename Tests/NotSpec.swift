@@ -29,6 +29,15 @@ final class NotSpec: QuickSpec {
                 expect { result = try op.execute(args, Interpreter()) }.toNot(throwError())
                 expect(result!) == false
             }
+
+            it("returns true when given nil value") {
+                let value: Any? = nil
+                let args = [PlanOutOperation.Keys.value.rawValue: value as Any]
+                var result: Bool?
+
+                expect { result = try op.execute(args, Interpreter()) }.toNot(throwError())
+                expect(result!) == true
+            }
         }
     }
 }

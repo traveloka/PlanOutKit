@@ -36,6 +36,13 @@ final class RoundSpec: QuickSpec {
                 expect { result = try op.execute(args, Interpreter()) }.toNot(throwError())
                 expect(result!).to(equal(4.0))
             }
+
+            it("throws when given nil value") {
+                let value: Any? = nil
+                let args = [PlanOutOperation.Keys.value.rawValue: value as Any]
+
+                expect { try op.execute(args, Interpreter()) }.to(throwError(errorType: OperationError.self))
+            }
         }
     }
 }

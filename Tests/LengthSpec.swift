@@ -55,6 +55,18 @@ final class LengthSpec: QuickSpec {
                     expect(result!).to(equal(value.count))
                 }
             }
+
+            context("when given nil values") {
+                it("returns 0") {
+                    let value: Any? = nil
+                    let args = [PlanOutOperation.Keys.value.rawValue: value as Any]
+                    var result: Int?
+
+                    expect { result = try op.execute(args, Interpreter()) }.toNot(throwError())
+                    expect(result!) == 0
+                }
+            }
+
             context("when given non literal types") {
                 it("throws") {
                     let value = [1: 2, 2: 3]
