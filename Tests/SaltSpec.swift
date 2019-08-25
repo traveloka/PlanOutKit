@@ -12,7 +12,7 @@ import Nimble
 
 final class SaltSpec: QuickSpec {
     override func spec() {
-        describe("Salt behavior") {
+        describe("Random operator salt behavior") {
             // RandomInteger is used for demonstration purposes.
             // tests regarding the operator's distribution correctness is written at RandomIntegerSpec.
             let op = PlanOutOperation.RandomInteger()

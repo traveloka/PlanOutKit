@@ -11,8 +11,10 @@ extension PlanOutOperation {
     final class RandomInteger: PlanOutOpRandom<Int> {
 
         override func randomExecute() throws -> Int? {
-            guard let minValue = args[Keys.min.rawValue], case let Literal.number(minNumber) = Literal(minValue),
-                let maxValue = args[Keys.max.rawValue], case let Literal.number(maxNumber) = Literal(maxValue) else {
+            guard let minValue = args[Keys.min.rawValue],
+                case let Literal.number(minNumber) = Literal(minValue),
+                let maxValue = args[Keys.max.rawValue],
+                case let Literal.number(maxNumber) = Literal(maxValue) else {
                     throw OperationError.missingArgs(args: "\(Keys.min.rawValue),\(Keys.max.rawValue)", type: self)
             }
 

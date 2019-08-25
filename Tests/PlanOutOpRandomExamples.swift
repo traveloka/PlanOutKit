@@ -18,36 +18,38 @@ final class PlanOutOpRandomSharedExamplesConfiguration: QuickConfiguration {
 
             itBehavesLike(.simpleOperator) { [.op: op] }
 
-            it("throws if unit key does not exist in arguments") {
-                let args: [String: Any] = [:]
+            describe("Unit value resolution") {
+                it("throws if unit key does not exist in arguments") {
+                    let args: [String: Any] = ["salt": "x"]
 
-                expect { try op.executeOp(args: args, context: ctx) }.to(throwError(errorType: OperationError.self))
-            }
+                    expect { try op.executeOp(args: args, context: ctx) }.to(throwError(errorType: OperationError.self))
+                }
 
-            it("throws if unit value is numeric type") {
-                let unitValue = 10
-                let args: [String: Any] = ["unit": unitValue]
+                it("throws if unit value is numeric type") {
+                    let unitValue = 10
+                    let args: [String: Any] = ["unit": unitValue, "salt": "x"]
 
-                expect { try op.executeOp(args: args, context: ctx) }.to(throwError(errorType: OperationError.self))
-            }
-            it("throws if unit value is dictionary type") {
-                let unitValue = ["foo": "Bar"]
-                let args: [String: Any] = ["unit": unitValue]
+                    expect { try op.executeOp(args: args, context: ctx) }.to(throwError(errorType: OperationError.self))
+                }
+                it("throws if unit value is dictionary type") {
+                    let unitValue = ["foo": "Bar"]
+                    let args: [String: Any] = ["unit": unitValue, "salt": "x"]
 
-                expect { try op.executeOp(args: args, context: ctx) }.to(throwError(errorType: OperationError.self))
-            }
-            it("throws if unit value is boolean type") {
-                let unitValue = false
-                let args: [String: Any] = ["unit": unitValue]
+                    expect { try op.executeOp(args: args, context: ctx) }.to(throwError(errorType: OperationError.self))
+                }
+                it("throws if unit value is boolean type") {
+                    let unitValue = false
+                    let args: [String: Any] = ["unit": unitValue, "salt": "x"]
 
-                expect { try op.executeOp(args: args, context: ctx) }.to(throwError(errorType: OperationError.self))
-            }
-            it("throws if unit value is non literal type") {
-                struct Foo {}
-                let unitValue = Foo()
-                let args: [String: Any] = ["unit": unitValue]
+                    expect { try op.executeOp(args: args, context: ctx) }.to(throwError(errorType: OperationError.self))
+                }
+                it("throws if unit value is non literal type") {
+                    struct Foo {}
+                    let unitValue = Foo()
+                    let args: [String: Any] = ["unit": unitValue, "salt": "x"]
 
-                expect { try op.executeOp(args: args, context: ctx) }.to(throwError(errorType: OperationError.self))
+                    expect { try op.executeOp(args: args, context: ctx) }.to(throwError(errorType: OperationError.self))
+                }
             }
 
             it("is a random operator") {

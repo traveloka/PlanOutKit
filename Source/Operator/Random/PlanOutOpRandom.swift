@@ -11,7 +11,6 @@ import CommonCrypto
 class PlanOutOpRandom<T>: PlanOutOpSimple {
     typealias ResultType = T
 
-
     /// Used to calculate the random
     private let longScale: Double = 0xFFFFFFFFFFFFFFF
 
@@ -41,7 +40,7 @@ class PlanOutOpRandom<T>: PlanOutOpSimple {
 
     init() {}
 
-    func simpleExecute(_ args: [String : Any], _ context: PlanOutOpContext) throws -> T? {
+    func simpleExecute(_ args: [String : Any?], _ context: PlanOutOpContext) throws -> T? {
         guard let unitValue = args[PlanOutOperation.Keys.unit.rawValue] else {
             throw OperationError.missingArgs(args: PlanOutOperation.Keys.unit.rawValue, type: self)
         }
@@ -56,7 +55,7 @@ class PlanOutOpRandom<T>: PlanOutOpSimple {
         }
 
         self.context = context
-        self.args = args
+        self.args = args.compactMapValues { $0 } // don't allow nil values.
 
         return try randomExecute()
     }

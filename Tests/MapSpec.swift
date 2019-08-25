@@ -19,7 +19,7 @@ final class MapSpec: QuickSpec {
 
             it("returns a copy of arguments") {
                 let args = ["a": 1, "b": 2]
-                var result: [String: Any]?
+                var result: [String: Any?]?
 
                 expect { result = try op.execute(args, Interpreter()) }.toNot(throwError())
                 expect((result! as! [String: Int])) == args
@@ -27,7 +27,7 @@ final class MapSpec: QuickSpec {
 
             it("strips op and salt from the copied arguments") {
                 let args: [String: Any] = ["a": 1, "op": "foo", "salt": "123"]
-                var result: [String: Any]?
+                var result: [String: Any?]?
 
                 expect { result = try op.execute(args, Interpreter()) }.toNot(throwError())
                 expect(result!["op"]).to(beNil())

@@ -19,7 +19,7 @@ extension PlanOutOperation {
 
             // Ensure that the number of draws must not exceed the total number of choices. If there are no number of draws specified, then it will always sample the whole choices by default.
             let numDraws: Int
-            if let drawsValue: Any = args[Keys.draws.rawValue], case let Literal.number(draws) = Literal(drawsValue) {
+            if let drawsValue = args[Keys.draws.rawValue], case let Literal.number(draws) = Literal(drawsValue) {
                 // follows the implementation where
                 guard case (0...choices.count) = Int(draws) else {
                     throw OperationError.invalidArgs(expected: "draws between \(0)...\(choices.count)", got: "\(Int(draws))")

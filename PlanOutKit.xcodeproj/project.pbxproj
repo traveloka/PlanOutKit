@@ -38,6 +38,7 @@
 		FE520E4E230AEFE9005C44E4 /* SampleSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE520E4D230AEFE9005C44E4 /* SampleSpec.swift */; };
 		FE520E50230AFEA5005C44E4 /* PlanOutOpRandomExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE520E4F230AFEA5005C44E4 /* PlanOutOpRandomExamples.swift */; };
 		FE520E52230BF385005C44E4 /* SaltSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE520E51230BF385005C44E4 /* SaltSpec.swift */; };
+		FE5FF17323128936003408F5 /* HashSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE5FF17223128936003408F5 /* HashSpec.swift */; };
 		FE7D55A12309B40A00736883 /* ProductSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7D55A02309B40A00736883 /* ProductSpec.swift */; };
 		FE7D55A32309B42400736883 /* SumSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7D55A22309B42400736883 /* SumSpec.swift */; };
 		FE7D55A52309B42F00736883 /* MinSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7D55A42309B42F00736883 /* MinSpec.swift */; };
@@ -161,6 +162,7 @@
 		FE520E4D230AEFE9005C44E4 /* SampleSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleSpec.swift; sourceTree = "<group>"; };
 		FE520E4F230AFEA5005C44E4 /* PlanOutOpRandomExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanOutOpRandomExamples.swift; sourceTree = "<group>"; };
 		FE520E51230BF385005C44E4 /* SaltSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaltSpec.swift; sourceTree = "<group>"; };
+		FE5FF17223128936003408F5 /* HashSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HashSpec.swift; sourceTree = "<group>"; };
 		FE7D55A02309B40A00736883 /* ProductSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSpec.swift; sourceTree = "<group>"; };
 		FE7D55A22309B42400736883 /* SumSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SumSpec.swift; sourceTree = "<group>"; };
 		FE7D55A42309B42F00736883 /* MinSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinSpec.swift; sourceTree = "<group>"; };
@@ -317,7 +319,6 @@
 		FE77C0612309DD1C00BBBE33 /* Random Specs */ = {
 			isa = PBXGroup;
 			children = (
-				FE520E51230BF385005C44E4 /* SaltSpec.swift */,
 				FE520E41230AEFA4005C44E4 /* RandomFloatingPointSpec.swift */,
 				FE520E43230AEFAC005C44E4 /* RandomIntegerSpec.swift */,
 				FE520E45230AEFBE005C44E4 /* BernoulliTrialSpec.swift */,
@@ -325,6 +326,8 @@
 				FE520E49230AEFD6005C44E4 /* UniformChoiceSpec.swift */,
 				FE520E4B230AEFE0005C44E4 /* WeightedChoiceSpec.swift */,
 				FE520E4D230AEFE9005C44E4 /* SampleSpec.swift */,
+				FE520E51230BF385005C44E4 /* SaltSpec.swift */,
+				FE5FF17223128936003408F5 /* HashSpec.swift */,
 			);
 			name = "Random Specs";
 			sourceTree = "<group>";
@@ -862,6 +865,7 @@
 				FEDAAF6E23071E2B00D0733E /* UnitSpec.swift in Sources */,
 				FE520E44230AEFAC005C44E4 /* RandomIntegerSpec.swift in Sources */,
 				FE7D55B92309C28200736883 /* DivideSpec.swift in Sources */,
+				FE5FF17323128936003408F5 /* HashSpec.swift in Sources */,
 				FE3C88B12308765200C59F7C /* GreaterThanSpec.swift in Sources */,
 				FE9483952309D03100680456 /* MapSpec.swift in Sources */,
 				FE520E46230AEFBE005C44E4 /* BernoulliTrialSpec.swift in Sources */,
