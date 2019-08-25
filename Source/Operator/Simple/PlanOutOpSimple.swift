@@ -10,7 +10,7 @@
 ///
 /// Operator will evaluate all arguments recursively through `PlanOutOpContext`, before simpleExecute is called.
 protocol PlanOutOpSimple: PlanOutOp {
-    func simpleExecute(_ args: [String: Any], _ context: PlanOutOpContext) throws -> ResultType?
+    func simpleExecute(_ args: [String: Any?], _ context: PlanOutOpContext) throws -> ResultType?
 }
 
 extension PlanOutOpSimple {

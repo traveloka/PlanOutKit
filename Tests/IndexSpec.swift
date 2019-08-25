@@ -223,6 +223,16 @@ final class IndexSpec: QuickSpec {
 
                         expect { try op.execute(args, Interpreter()) }.to(throwError(errorType: OperationError.self))
                     }
+
+                    it("returns nil if the value is nil") {
+                        let base: [String: Int?] = ["a": 1, "b": 2, "c": nil, "d": 4]
+                        let index = "c"
+                        let args: [String: Any] = buildArg(base, index)
+                        var result: Any?
+
+                        expect { result = try op.execute(args, Interpreter()) }.toNot(throwError())
+                        expect(result).to(beNil())
+                    }
                 }
             }
 

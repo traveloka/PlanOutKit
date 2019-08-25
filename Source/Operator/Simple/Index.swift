@@ -12,26 +12,28 @@ extension PlanOutOperation {
     final class Index: PlanOutOpSimple {
         typealias ResultType = Any
 
-        func simpleExecute(_ args: [String : Any], _ context: PlanOutOpContext) throws -> Any? {
-            guard let baseValue = args[Keys.base.rawValue] else {
+        func simpleExecute(_ args: [String : Any?], _ context: PlanOutOpContext) throws -> Any? {
+            guard let possibleBaseValue = args[Keys.base.rawValue],
+                let baseValue = possibleBaseValue else {
                 throw OperationError.missingArgs(args: Keys.base.rawValue, type: String(describing: self))
             }
 
-            guard let indexValue = args[Keys.index.rawValue] else {
+            guard let possibleIndexValue = args[Keys.index.rawValue] else {
                 throw OperationError.missingArgs(args: Keys.index.rawValue, type: String(describing: self))
             }
 
             switch Literal(baseValue) {
             // For list types, the index has to be an Int, and it must be within the array's index range.
             case .list(let arrayValue):
-                guard let numericIndex = indexValue as? Int, case (0..<arrayValue.count) = numericIndex else {
+                guard let numericIndex = possibleIndexValue as? Int,
+                    case (0..<arrayValue.count) = numericIndex else {
                     return nil
                 }
                 return arrayValue[numericIndex]
 
             // In PlanOut the key has to be String.
             case .dictionary(let dictionaryValue):
-                guard let index = indexValue as? String else {
+                guard let index = possibleIndexValue as? String else {
                     return nil
                 }
                 return dictionaryValue[index] ?? nil
