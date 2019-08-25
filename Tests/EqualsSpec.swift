@@ -30,6 +30,36 @@ final class EqualsSpec: QuickSpec {
                 expect { result = try op.execute(args, Interpreter()) }.toNot(throwError())
                 expect(result!).to(equal(false))
             }
+
+            context("when given nil values") {
+                it("returns false when only lefthand value is nil") {
+                    let left: Any? = nil
+                    let right = 3
+                    let args = binaryArgsBuilder(left as Any, right)
+                    var result: Bool?
+
+                    expect { result = try op.execute(args, Interpreter()) }.toNot(throwError())
+                    expect(result!) == false
+                }
+                it("returns false when only righthand value is nil") {
+                    let left = 4
+                    let right: Any? = nil
+                    let args = binaryArgsBuilder(left, right as Any)
+                    var result: Bool?
+
+                    expect { result = try op.execute(args, Interpreter()) }.toNot(throwError())
+                    expect(result!) == false
+                }
+                it("returns true when both values are nil") {
+                    let left: Any? = nil
+                    let right: Any? = nil
+                    let args = binaryArgsBuilder(left as Any, right as Any)
+                    var result: Bool?
+
+                    expect { result = try op.execute(args, Interpreter()) }.toNot(throwError())
+                    expect(result!) == true
+                }
+            }
         }
     }
 }

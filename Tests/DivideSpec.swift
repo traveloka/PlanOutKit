@@ -30,6 +30,14 @@ final class DivideSpec: QuickSpec {
                 expect { result = try op.execute(args, Interpreter()) }.toNot(throwError())
                 expect(result!).to(equal(2.0))
             }
+
+            it("throws when values are nil") {
+                let left: Any? = nil
+                let right: Any? = nil
+                let args = binaryArgsBuilder(left as Any, right as Any)
+
+                expect { try op.execute(args, Interpreter()) }.to(throwError(errorType: OperationError.self))
+            }
         }
     }
 }

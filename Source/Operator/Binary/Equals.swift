@@ -11,8 +11,12 @@ extension PlanOutOperation {
     final class Equals: PlanOutOpBinary {
         typealias ResultType = Bool
 
-        func binaryExecute(left: Literal, right: Literal) throws -> Bool? {
-            return left == right
+        func binaryExecute(left: Any?, right: Any?) throws -> Bool? {
+            if let leftValue = left, let rightValue = right {
+                return Literal(leftValue) == Literal(rightValue)
+            }
+
+            return (left == nil && right == nil)
         }
     }
 }
