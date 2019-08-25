@@ -49,6 +49,13 @@ final class PlanOutOpCommutativeSharedExamplesConfiguration: QuickConfiguration 
 
                 expect { try op.executeOp(args: args, context: ctx) }.to(throwError(errorType: OperationError.self))
             }
+
+            it("throws if there are nil values within the collection") {
+                let values: Any? = [1, nil, 3]
+                let args: [String: Any] = ["foo": values as Any]
+
+                expect { try op.executeOp(args: args, context: ctx) }.to(throwError(errorType: OperationError.self))
+            }
         }
     }
 }

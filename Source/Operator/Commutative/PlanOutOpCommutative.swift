@@ -11,7 +11,7 @@ protocol PlanOutOpCommutative: PlanOutOpSimple where ResultType == Double {
 }
 
 extension PlanOutOpCommutative {
-    func simpleExecute(_ args: [String : Any], _ context: PlanOutOpContext) throws -> Double? {
+    func simpleExecute(_ args: [String : Any?], _ context: PlanOutOpContext) throws -> Double? {
         guard let values = args[PlanOutOperation.Keys.values.rawValue] as? [Any] else {
             throw OperationError.missingArgs(args: PlanOutOperation.Keys.values.rawValue, type: self)
         }
