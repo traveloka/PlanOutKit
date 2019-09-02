@@ -11,7 +11,7 @@ import Foundation
 /// ExperimentDefinition represents the "blueprint" of an Experiment.
 ///
 /// Multiple experiments with the same definition may exist within a single namespace; however, they should have different segment allocations.
-public class ExperimentDefinition {
+struct ExperimentDefinition {
     /// The experiment definition identifier.
     ///
     /// Identifier should be unique across all other experiment definitions.
