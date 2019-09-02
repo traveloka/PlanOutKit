@@ -51,9 +51,11 @@ public class Namespace {
                          overrides: [String: Any] = [:],
                          totalSegments: Int,
                          customSalt: String? = nil,
-                         logger: PlanOutLogger? = nil) {
+                         logger: PlanOutLogger? = nil) throws {
         // TODO: throw errors instead of asserts.
-        assert(unitKeys.count > 0, "Unit keys must have at least one element.")
+        guard unitKeys.count > 0 else {
+            throw NamespaceError.missingUnitKeys
+        }
 
         self.name = name
         self.salt = customSalt ?? name
@@ -72,9 +74,11 @@ extension Namespace {
     /// - Parameters:
     ///   - identifier: The name of the experiment definition.
     ///   - serializedScript: The serialized PlanOut script for the experiment.
-    public func defineExperiment(identifier: String, serializedScript: String, isDefaultExperiment: Bool = false) {
+    public func defineExperiment(identifier: String, serializedScript: String, isDefaultExperiment: Bool = false) throws {
         // TODO: throw errors instead of asserts.
-        assert(definitions[identifier] == nil, "Duplicate experiment definition found with id: \(identifier)")
+        guard definitions[identifier] == nil else {
+            throw NamespaceError.duplicateDefinition(identifier)
+        }
 
         definitions[identifier] = ExperimentDefinition(identifier, serializedScript, isDefault: isDefaultExperiment)
     }

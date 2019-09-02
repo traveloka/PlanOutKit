@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		E69B4CA72801DDED31DC1830 /* libPods-PlanOutKitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E75F5E79282FEC3B9009C6 /* libPods-PlanOutKitTests.a */; };
 		FE2EFA5F230C63DF00C36162 /* RandomOpAssertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2EFA5E230C63DF00C36162 /* RandomOpAssertions.swift */; };
+		FE343E7F231D29E20017E047 /* NamespaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE343E7E231D29E20017E047 /* NamespaceError.swift */; };
 		FE3C88AC2308760F00C59F7C /* PlanOutOpComparisonExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3C88AB2308760F00C59F7C /* PlanOutOpComparisonExamples.swift */; };
 		FE3C88AF2308764600C59F7C /* LessThanSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3C88AE2308764600C59F7C /* LessThanSpec.swift */; };
 		FE3C88B12308765200C59F7C /* GreaterThanSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3C88B02308765200C59F7C /* GreaterThanSpec.swift */; };
@@ -133,6 +134,7 @@
 		CCA3BCBDA3E49C9BF5ABAEA2 /* Pods-PlanOutKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanOutKitTests.debug.xcconfig"; path = "Target Support Files/Pods-PlanOutKitTests/Pods-PlanOutKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F963FD62205E1C103EC8034A /* Pods-PlanOutKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanOutKitTests.release.xcconfig"; path = "Target Support Files/Pods-PlanOutKitTests/Pods-PlanOutKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		FE2EFA5E230C63DF00C36162 /* RandomOpAssertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomOpAssertions.swift; sourceTree = "<group>"; };
+		FE343E7E231D29E20017E047 /* NamespaceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NamespaceError.swift; sourceTree = "<group>"; };
 		FE3C88AB2308760F00C59F7C /* PlanOutOpComparisonExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlanOutOpComparisonExamples.swift; sourceTree = "<group>"; };
 		FE3C88AE2308764600C59F7C /* LessThanSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessThanSpec.swift; sourceTree = "<group>"; };
 		FE3C88B02308765200C59F7C /* GreaterThanSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GreaterThanSpec.swift; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 			children = (
 				FEDAAEF52306C7A100D0733E /* Namespace.swift */,
 				FEDAAF2B2306C7A100D0733E /* ReadableAssignment.swift */,
+				FE343E7E231D29E20017E047 /* NamespaceError.swift */,
 				FEDAAF272306C7A100D0733E /* Experiment */,
 				FEDAAEFA2306C7A100D0733E /* Operator */,
 				FEDAAEEE2306C7A000D0733E /* Helper */,
@@ -818,6 +821,7 @@
 				FEDAAF3E2306C7A100D0733E /* PlanOutOpSimple.swift in Sources */,
 				FEDAAF2D2306C7A100D0733E /* Unit.swift in Sources */,
 				FEDAAF362306C7A100D0733E /* Length.swift in Sources */,
+				FE343E7F231D29E20017E047 /* NamespaceError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

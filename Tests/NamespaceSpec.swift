@@ -14,7 +14,7 @@ final class NamespaceSpec: QuickSpec {
     override func spec() {
         describe("Namespace") {
             it("is able to add a new namespace without custom salt") {
-                let namespace = Namespace("namespaceA",
+                let namespace = try! Namespace("namespaceA",
                 unitKeys: ["userid"],
                 inputs: ["userid": 1234],
                 overrides: [:],
@@ -29,7 +29,7 @@ final class NamespaceSpec: QuickSpec {
             }
             
             it("is able to add a new namespace with custom salt") {
-                let namespace = Namespace("namespaceA",
+                let namespace = try! Namespace("namespaceA",
                                           unitKeys: ["userid"],
                                           inputs: ["userid": 1234],
                                           overrides: [:],
@@ -44,7 +44,7 @@ final class NamespaceSpec: QuickSpec {
             }
             
             it("is able to add a new experiment") {
-                let namespace = Namespace("namespaceA",
+                let namespace = try! Namespace("namespaceA",
                                           unitKeys: ["userid"],
                                           inputs: ["userid": 1234],
                                           overrides: [:],
