@@ -176,21 +176,15 @@ extension Interpreter: PlanOutOpContext {
         if let reserved = ReservedNames(rawValue: name) {
             switch reserved {
             case .data:
-                guard let dictionaryValue = value as? [String: Any] else {
-                    return
-                }
+                guard let dictionaryValue = value as? [String: Any] else { return }
                 self.data = dictionaryValue
 
             case .overrides:
-                guard let dictionaryValue = value as? [String: Any] else {
-                    return
-                }
+                guard let dictionaryValue = value as? [String: Any] else { return }
                 self.overrides = dictionaryValue
 
             case .experimentSalt:
-                guard let stringValue = value as? String else {
-                    return
-                }
+                guard let stringValue = value as? String else { return }
                 self.experimentSalt = stringValue
             }
         }
@@ -200,7 +194,8 @@ extension Interpreter: PlanOutOpContext {
             return
         }
 
-        // special handling if value is potentially PlanOutRandom operator instance with args, for testing purposes.
+        // special handling if value is potentially PlanOutRandom operator instance with args, for testing purposes only.
+        // ordinary PlanOut operations should never execute this part.
         if let tuple = value as? (op: PlanOutExecutable, args: [String: Any]), tuple.op.isRandomOperator {
             // modify arguments with added salt parameter.
             // add salt value if it does not exist yet, with variable name as salt.

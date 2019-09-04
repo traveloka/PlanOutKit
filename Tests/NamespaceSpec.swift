@@ -67,6 +67,44 @@ final class NamespaceSpec: QuickSpec {
                     }.to(throwError(errorType: NamespaceError.self))
             }
 
+            describe("Unit Assignment") {
+                let keys = ["foo"]
+                let inputs = ["foo": "123"]
+
+                context("when units are allocated to an active experiment") {
+                    context("given the requested param exists in parameter assignment") {
+                        let logger = MockLogger()
+                        let namespace = try! Namespace("ns", unitKeys: keys, inputs: inputs, totalSegments: 10, logger: logger)
+                        try! namespace.defineExperiment(identifier: "defA", serializedScript: StubReader.get("simple-0"))
+                        try! namespace.addExperiment(name: "expA", definitionId: "defA", segmentCount: 10)
+
+                        it("returns value from parameter assignment") {
+                            let result = try! namespace.get("foo") as! String
+                            expect(result) == "some string"
+                        }
+
+                        it("sends exposure log") {
+                            expect(logger.logs.count) == 1
+                        }
+                    }
+                    context("given the requested param does not exist in parameter assignment") {
+                        let logger = MockLogger()
+                        let namespace = try! Namespace("ns", unitKeys: keys, inputs: inputs, totalSegments: 10, logger: logger)
+                        try! namespace.defineExperiment(identifier: "defA", serializedScript: StubReader.get("simple-0"))
+                        try! namespace.addExperiment(name: "expA", definitionId: "defA", segmentCount: 10)
+
+                        it("returns provided default value") {
+                            let result = try! namespace.get("spoon", defaultValue: "default")
+                            expect(result) == "default"
+                        }
+
+                        it("sends exposure log") {
+                            expect(logger.logs.count) == 1
+                        }
+                    }
+                }
+            }
+
             describe("Default Experiment") {
                 let keys = ["foo"]
                 let inputs = ["foo": "123"]
@@ -97,7 +135,7 @@ final class NamespaceSpec: QuickSpec {
                     context("when default experiment is defined") {
                         let logger = MockLogger()
                         let namespace = try! Namespace("ns", unitKeys: keys, inputs: inputs, totalSegments: 10, logger: logger)
-                        try! namespace.defineExperiment(identifier: "defA", serializedScript: StubReader.get("simple-0"), isDefaultExperiment: false)
+                        try! namespace.defineExperiment(identifier: "defA", serializedScript: StubReader.get("simple-0"))
                         try! namespace.defineExperiment(identifier: "defB", serializedScript: StubReader.get("simple-1"), isDefaultExperiment: true)
 
                         // add experiment
@@ -131,7 +169,7 @@ final class NamespaceSpec: QuickSpec {
                     context("when default experiment is not defined") {
                         let logger = MockLogger()
                         let namespace = try! Namespace("ns", unitKeys: keys, inputs: inputs, totalSegments: 10, logger: logger)
-                        try! namespace.defineExperiment(identifier: "defA", serializedScript: StubReader.get("simple-0"), isDefaultExperiment: false)
+                        try! namespace.defineExperiment(identifier: "defA", serializedScript: StubReader.get("simple-0"))
 
                         it("always returns provided default value") {
                             let result = try! namespace.get("foo", defaultValue: "default")
