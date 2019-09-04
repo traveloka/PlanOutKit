@@ -53,74 +53,40 @@ enum PlanOutOperation: String {
     /// Returns the executable PlanOutOperator
     func executableInstance() -> PlanOutExecutable {
         switch self {
-        case .literal:
-            return LiteralOperation()
-        case .get:
-            return Get()
-        case .set:
-            return Set()
-        case .sequence:
-            return Sequence()
-        case .returnOperation:
-            return Return()
-        case .array:
-            return Array()
-        case .map:
-            return Map()
-        case .coalesce:
-            return Coalesce()
-        case .index:
-            return Index()
-        case .condition:
-            return Condition()
-        case .and:
-            return And()
-        case .or:
-            return Or()
-        case .product:
-            return Product()
-        case .sum:
-            return Sum()
-        case .equals:
-            return Equals()
-        case .greaterThan:
-            return GreaterThan()
-        case .greaterThanOrEqualTo:
-            return GreaterThanOrEqualTo()
-        case .lessThan:
-            return LessThan()
-        case .lessThanOrEqualTo:
-            return LessThanOrEqualTo()
-        case .mod:
-            return Mod()
-        case .divide:
-            return Divide()
-        case .round:
-            return Round()
-        case .not:
-            return Not()
-        case .negative:
-            return Negative()
-        case .min:
-            return Min()
-        case .max:
-            return Max()
-        case .length:
-            return Length()
-        case .randomInteger:
-            return RandomInteger()
-        case .randomFloat:
-            return RandomFloatingPoint()
-        case .bernoulliTrial:
-            return BernoulliTrial()
-        case .bernoulliFilter:
-            return BernoulliFilter()
-        case .uniformChoice:
-            return UniformChoice()
-        case .weightedChoice:
-            return WeightedChoice()
-        case .sample:
-            return Sample()
+        case .literal: return LiteralOperation()
+        case .get: return Get()
+        case .set: return Set()
+        case .sequence: return Sequence()
+        case .returnOperation: return Return()
+        case .array: return Array()
+        case .map: return Map()
+        case .coalesce: return Coalesce()
+        case .index: return Index()
+        case .condition: return Condition()
+        case .and: return And()
+        case .or: return Or()
+        case .product: return Product()
+        case .sum: return Sum()
+        case .equals: return Equals()
+        case .greaterThan: return GreaterThan()
+        case .greaterThanOrEqualTo: return GreaterThanOrEqualTo()
+        case .lessThan: return LessThan()
+        case .lessThanOrEqualTo: return LessThanOrEqualTo()
+        case .mod: return Mod()
+        case .divide: return Divide()
+        case .round: return Round()
+        case .not: return Not()
+        case .negative: return Negative()
+        case .min: return Min()
+        case .max: return Max()
+        case .length: return Length()
+        case .randomInteger: return RandomInteger()
+        case .randomFloat: return RandomFloatingPoint()
+        case .bernoulliTrial: return BernoulliTrial()
+        case .bernoulliFilter: return BernoulliFilter()
+        case .uniformChoice: return UniformChoice()
+        case .weightedChoice: return WeightedChoice()
+        case .sample: return Sample()
         }
     }
 }
