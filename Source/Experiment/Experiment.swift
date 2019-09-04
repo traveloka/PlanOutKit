@@ -53,6 +53,9 @@ class Experiment {
         // store the interpreter for later, (i.e. forwarding ReadableAssignment methods to the interpreter).
         self._interpreter = interpreter
 
+        // do not log if the unit is exposed to a default experiment.
+        guard !definition.isDefaultExperiment else { return }
+
         logExposureIfNeeded(with: logger, interpreter: interpreter)
     }
 

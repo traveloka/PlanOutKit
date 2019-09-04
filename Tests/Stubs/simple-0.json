@@ -1,0 +1,20 @@
+{
+ "op": "seq",
+ "seq": [
+  {
+   "op": "set",
+   "var": "foo",
+   "value": "some string"
+  },
+  {
+   "op": "set",
+   "var": "bar",
+   "value": 1
+  },
+  {
+   "op": "set",
+   "var": "baz",
+   "value": false
+  }
+ ]
+}

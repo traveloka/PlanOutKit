@@ -7,3 +7,12 @@
 //
 
 import Foundation
+
+final class StubReader {
+    static func get(_ name: String) -> String {
+        let path = Bundle(for: self).path(forResource: name, ofType: "json")!
+        let jsonData = try! Data(contentsOf: URL(fileURLWithPath: path))
+
+        return String(data: jsonData, encoding: .utf8)!
+    }
+}

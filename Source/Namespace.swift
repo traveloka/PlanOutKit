@@ -45,6 +45,17 @@ public class Namespace {
         return activeExperiment != nil
     }
 
+    /// Identifier for default experiment definition.
+    ///
+    /// This identifier will be registered and used as default experiment if the unit is allocated to a segment that does not have an experiment.
+    private var defaultExperimentIdentifier: String = ""
+
+    /// Computed property for ExperimentDefinition instance of default experiment.
+    private var defaultExperimentDefinition: ExperimentDefinition? {
+        guard !defaultExperimentIdentifier.isEmpty else { return nil }
+        return definitions[defaultExperimentIdentifier]
+    }
+
     required public init(_ name: String,
                          unitKeys: [String],
                          inputs: [String: Any],
@@ -75,9 +86,14 @@ extension Namespace {
     ///   - identifier: The name of the experiment definition.
     ///   - serializedScript: The serialized PlanOut script for the experiment.
     public func defineExperiment(identifier: String, serializedScript: String, isDefaultExperiment: Bool = false) throws {
-        // TODO: throw errors instead of asserts.
         guard definitions[identifier] == nil else {
             throw NamespaceError.duplicateDefinition(identifier)
+        }
+
+        if isDefaultExperiment {
+            // only allow one default experiment identifier.
+            guard defaultExperimentIdentifier.isEmpty else { return }
+            defaultExperimentIdentifier = identifier
         }
 
         definitions[identifier] = ExperimentDefinition(identifier, serializedScript, isDefault: isDefaultExperiment)
@@ -92,7 +108,9 @@ extension Namespace {
     ///   - definition: The ExperimentDefinition used for the instance.
     ///   - segmentCount: The number of segments that should be allocated for this instance.
     public func addExperiment(name: String, definitionId: String, segmentCount: Int) throws {
-        guard let definition = definitions[definitionId] else { return }
+        guard let definition = definitions[definitionId], !definition.isDefaultExperiment else {
+            throw NamespaceError.definitionNotFound(definitionId)
+        }
 
         try segmentAllocator.allocate(name, segmentCount)
 
@@ -112,7 +130,9 @@ extension Namespace {
     ///   - definition: The ExperimentDefinition used for the instance.
     ///   - segments: An array of segments that is allocated for this instance.
     public func addExperiment(name: String, definitionId: String, segments: [Int]) throws {
-        guard let definition = definitions[definitionId] else { return }
+        guard let definition = definitions[definitionId], !definition.isDefaultExperiment else {
+            throw NamespaceError.definitionNotFound(definitionId)
+        }
 
         try segmentAllocator.allocate(name, segments: segments)
 
@@ -161,7 +181,23 @@ extension Namespace {
         if let experimentId = segmentAllocator.identifier(forUnit: unit.identifier),
             let experiment = experiments[experimentId] {
             try experiment.assign(unit, logger: self.logger)
+            // assign to a registered experiment.
             activeExperiment = experiment
+        } else {
+            // assign unit to the default experiment instead.
+            try assignDefault()
         }
+    }
+
+    func assignDefault() throws {
+        guard !isAssigned, let someDefaultDefinition = defaultExperimentDefinition else { return }
+
+        let experimentName = "\(self.name)-\(someDefaultDefinition.id)"
+        let experimentSalt = SaltProvider.generate(values: [self.salt, name])
+        let defaultExperiment = Experiment(someDefaultDefinition, name: experimentName, salt: experimentSalt)
+
+        // assign unit to default experiment
+        try defaultExperiment.assign(unit, logger: self.logger)
+        activeExperiment = defaultExperiment
     }
 }

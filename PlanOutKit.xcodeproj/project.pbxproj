@@ -56,6 +56,9 @@
 		FE7D55BD2309C34400736883 /* NumericOperatorExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE7D55BC2309C34400736883 /* NumericOperatorExamples.swift */; };
 		FE9483942309D00500680456 /* IndexSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9483902309CEDE00680456 /* IndexSpec.swift */; };
 		FE9483952309D03100680456 /* MapSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9483922309CEE700680456 /* MapSpec.swift */; };
+		FE9C44C8231F9E63001213B2 /* StubReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9C44C7231F9E63001213B2 /* StubReader.swift */; };
+		FE9C44CB231FA0E7001213B2 /* simple-0.json in Resources */ = {isa = PBXBuildFile; fileRef = FE9C44C9231FA0E7001213B2 /* simple-0.json */; };
+		FE9C44CC231FA0E7001213B2 /* simple-1.json in Resources */ = {isa = PBXBuildFile; fileRef = FE9C44CA231FA0E7001213B2 /* simple-1.json */; };
 		FEDAAEDD2306C5E700D0733E /* PlanOutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEDAAED32306C5E700D0733E /* PlanOutKit.framework */; };
 		FEDAAEE42306C5E700D0733E /* PlanOutKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FEDAAED62306C5E700D0733E /* PlanOutKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FEDAAF2C2306C7A100D0733E /* SaltProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAAEEF2306C7A000D0733E /* SaltProvider.swift */; };
@@ -181,6 +184,9 @@
 		FE7D55BC2309C34400736883 /* NumericOperatorExamples.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumericOperatorExamples.swift; sourceTree = "<group>"; };
 		FE9483902309CEDE00680456 /* IndexSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndexSpec.swift; sourceTree = "<group>"; };
 		FE9483922309CEE700680456 /* MapSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapSpec.swift; sourceTree = "<group>"; };
+		FE9C44C7231F9E63001213B2 /* StubReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubReader.swift; sourceTree = "<group>"; };
+		FE9C44C9231FA0E7001213B2 /* simple-0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "simple-0.json"; sourceTree = "<group>"; };
+		FE9C44CA231FA0E7001213B2 /* simple-1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "simple-1.json"; sourceTree = "<group>"; };
 		FEDAAED32306C5E700D0733E /* PlanOutKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PlanOutKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEDAAED62306C5E700D0733E /* PlanOutKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlanOutKit.h; sourceTree = "<group>"; };
 		FEDAAED72306C5E700D0733E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -305,6 +311,7 @@
 				FEDAAF662306CFDF00D0733E /* Matchers */,
 				FE3C88BB2308872800C59F7C /* SharedBehavior.swift */,
 				FE2EFA5E230C63DF00C36162 /* RandomOpAssertions.swift */,
+				FE9C44C7231F9E63001213B2 /* StubReader.swift */,
 			);
 			name = "Test Helpers";
 			sourceTree = "<group>";
@@ -403,6 +410,15 @@
 			name = "Base Specs";
 			sourceTree = "<group>";
 		};
+		FE9C44C6231F9BBF001213B2 /* Stubs */ = {
+			isa = PBXGroup;
+			children = (
+				FE9C44C9231FA0E7001213B2 /* simple-0.json */,
+				FE9C44CA231FA0E7001213B2 /* simple-1.json */,
+			);
+			path = Stubs;
+			sourceTree = "<group>";
+		};
 		FEDAAEC92306C5E700D0733E = {
 			isa = PBXGroup;
 			children = (
@@ -441,6 +457,7 @@
 		FEDAAEE02306C5E700D0733E /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				FE9C44C6231F9BBF001213B2 /* Stubs */,
 				FEDAAF612306C83800D0733E /* Supporting Files */,
 				FE3C88BA2308870E00C59F7C /* Test Helpers */,
 				FEDAAF622306CBF400D0733E /* Operator */,
@@ -736,6 +753,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FE9C44CB231FA0E7001213B2 /* simple-0.json in Resources */,
+				FE9C44CC231FA0E7001213B2 /* simple-1.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -858,6 +877,7 @@
 				FE3C88B32308765D00C59F7C /* LessThanOrEqualToSpec.swift in Sources */,
 				FE7D55A52309B42F00736883 /* MinSpec.swift in Sources */,
 				FE520E38230A77D2005C44E4 /* SetSpec.swift in Sources */,
+				FE9C44C8231F9E63001213B2 /* StubReader.swift in Sources */,
 				FE7D55A92309B48200736883 /* PlanOutOpCommutativeExamples.swift in Sources */,
 				FE520E39230A77D5005C44E4 /* OrSpec.swift in Sources */,
 				FE520E52230BF385005C44E4 /* SaltSpec.swift in Sources */,
