@@ -15,4 +15,9 @@ final class StubReader {
 
         return String(data: jsonData, encoding: .utf8)!
     }
+
+    static func getDictionary(_ name: String) -> [String: Any] {
+        let value = get(name)
+        return try! JSONSerialization.jsonObject(with: value.data(using: .utf8)!) as! [String: Any]
+    }
 }

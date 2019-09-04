@@ -59,6 +59,7 @@
 		FE9C44C8231F9E63001213B2 /* StubReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE9C44C7231F9E63001213B2 /* StubReader.swift */; };
 		FE9C44CB231FA0E7001213B2 /* simple-0.json in Resources */ = {isa = PBXBuildFile; fileRef = FE9C44C9231FA0E7001213B2 /* simple-0.json */; };
 		FE9C44CC231FA0E7001213B2 /* simple-1.json in Resources */ = {isa = PBXBuildFile; fileRef = FE9C44CA231FA0E7001213B2 /* simple-1.json */; };
+		FE9C44CE231FCF75001213B2 /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = FE9C44CD231FCF75001213B2 /* sample.json */; };
 		FEDAAEDD2306C5E700D0733E /* PlanOutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEDAAED32306C5E700D0733E /* PlanOutKit.framework */; };
 		FEDAAEE42306C5E700D0733E /* PlanOutKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FEDAAED62306C5E700D0733E /* PlanOutKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FEDAAF2C2306C7A100D0733E /* SaltProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAAEEF2306C7A000D0733E /* SaltProvider.swift */; };
@@ -187,6 +188,7 @@
 		FE9C44C7231F9E63001213B2 /* StubReader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StubReader.swift; sourceTree = "<group>"; };
 		FE9C44C9231FA0E7001213B2 /* simple-0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "simple-0.json"; sourceTree = "<group>"; };
 		FE9C44CA231FA0E7001213B2 /* simple-1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "simple-1.json"; sourceTree = "<group>"; };
+		FE9C44CD231FCF75001213B2 /* sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
 		FEDAAED32306C5E700D0733E /* PlanOutKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PlanOutKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEDAAED62306C5E700D0733E /* PlanOutKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlanOutKit.h; sourceTree = "<group>"; };
 		FEDAAED72306C5E700D0733E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -413,6 +415,7 @@
 		FE9C44C6231F9BBF001213B2 /* Stubs */ = {
 			isa = PBXGroup;
 			children = (
+				FE9C44CD231FCF75001213B2 /* sample.json */,
 				FE9C44C9231FA0E7001213B2 /* simple-0.json */,
 				FE9C44CA231FA0E7001213B2 /* simple-1.json */,
 			);
@@ -755,6 +758,7 @@
 			files = (
 				FE9C44CB231FA0E7001213B2 /* simple-0.json in Resources */,
 				FE9C44CC231FA0E7001213B2 /* simple-1.json in Resources */,
+				FE9C44CE231FCF75001213B2 /* sample.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

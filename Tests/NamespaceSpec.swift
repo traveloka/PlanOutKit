@@ -15,16 +15,17 @@ final class NamespaceSpec: QuickSpec {
         describe("Namespace") {
             it("is able to add a new namespace without custom salt") {
                 let namespace = try! Namespace("namespaceA",
-                unitKeys: ["userid"],
-                inputs: ["userid": 1234],
-                overrides: [:],
-                totalSegments: 100,
-                customSalt: nil,
-                logger: nil)
+                                               unitKeys: ["userid"],
+                                               inputs: ["userid": 1234],
+                                               overrides: [:],
+                                               totalSegments: 100,
+                                               customSalt: nil,
+                                               logger: nil)
+
                 expect(namespace.name) == "namespaceA"
-                
                 expect(namespace.salt) == "namespaceA"
-                expect { try namespace.getParams() }.notTo(throwError())
+
+                expect { try namespace.getParams() }.toNot(throwError())
                 expect { try namespace.getParams().count } == 0
             }
             
@@ -36,27 +37,20 @@ final class NamespaceSpec: QuickSpec {
                                           totalSegments: 100,
                                           customSalt: "foo",
                                           logger: nil)
+
                 expect(namespace.name) == "namespaceA"
-                
                 expect(namespace.salt) == "foo"
-                expect { try namespace.getParams() }.notTo(throwError())
+
+                expect { try namespace.getParams() }.toNot(throwError())
                 expect { try namespace.getParams().count } == 0
             }
             
             it("is able to add a new experiment") {
-                let namespace = try! Namespace("namespaceA",
-                                          unitKeys: ["userid"],
-                                          inputs: ["userid": 1234],
-                                          overrides: [:],
-                                          totalSegments: 100,
-                                          customSalt: nil,
-                                          logger: nil)
-            
-                let expDef = ExperimentDefinition("expDefA", "{\"op\": \"seq\",\"seq\": [{\"op\": \"set\",\"var\": \"group_size\",\"value\": {\"choices\": {\"op\": \"array\",\"values\": [1,10]},\"unit\": {\"op\": \"get\",\"var\": \"userid\"},\"op\": \"uniformChoice\"}},{\"op\": \"set\",\"var\": \"specific_goal\",\"value\": {\"p\": 0.8,\"unit\": {\"op\": \"get\",\"var\": \"userid\"},\"op\": \"bernoulliTrial\"}},{\"op\": \"cond\",\"cond\": [{\"if\": {\"op\": \"get\",\"var\": \"specific_goal\"},\"then\": {\"op\": \"seq\",\"seq\": [{\"op\": \"set\",\"var\": \"ratings_per_user_goal\",\"value\": {\"choices\": {\"op\": \"array\",\"values\": [8,16,32,64]},\"unit\": {\"op\": \"get\",\"var\": \"userid\"},\"op\": \"uniformChoice\"}},{\"op\": \"set\",\"var\": \"ratings_goal\",\"value\": {\"op\": \"product\",\"values\": [{\"op\": \"get\",\"var\": \"group_size\"},{\"op\": \"get\",\"var\": \"ratings_per_user_goal\"}]}}]}}]}]}")
+                let namespace = try! Namespace("namespaceA", unitKeys: ["userid"], inputs: ["userid": 1234], totalSegments: 100)
                 
-                expect {try namespace.defineExperiment(identifier: "expDefA", serializedScript: "{\"op\": \"seq\",\"seq\": [{\"op\": \"set\",\"var\": \"group_size\",\"value\": {\"choices\": {\"op\": \"array\",\"values\": [1,10]},\"unit\": {\"op\": \"get\",\"var\": \"userid\"},\"op\": \"uniformChoice\"}},{\"op\": \"set\",\"var\": \"specific_goal\",\"value\": {\"p\": 0.8,\"unit\": {\"op\": \"get\",\"var\": \"userid\"},\"op\": \"bernoulliTrial\"}},{\"op\": \"cond\",\"cond\": [{\"if\": {\"op\": \"get\",\"var\": \"specific_goal\"},\"then\": {\"op\": \"seq\",\"seq\": [{\"op\": \"set\",\"var\": \"ratings_per_user_goal\",\"value\": {\"choices\": {\"op\": \"array\",\"values\": [8,16,32,64]},\"unit\": {\"op\": \"get\",\"var\": \"userid\"},\"op\": \"uniformChoice\"}},{\"op\": \"set\",\"var\": \"ratings_goal\",\"value\": {\"op\": \"product\",\"values\": [{\"op\": \"get\",\"var\": \"group_size\"},{\"op\": \"get\",\"var\": \"ratings_per_user_goal\"}]}}]}}]}]}")}.notTo(throwError())
-                expect { try namespace.addExperiment(name: "experimentA", definitionId: "expDefA", segmentCount: 10) }.notTo(throwError())
-                expect { try namespace.assignIfNeeded() }.notTo(throwError())
+                expect { try namespace.defineExperiment(identifier: "expDefA", serializedScript: StubReader.get("sample")) }.toNot(throwError())
+                expect { try namespace.addExperiment(name: "experimentA", definitionId: "expDefA", segmentCount: 10) }.toNot(throwError())
+                expect { try namespace.assignIfNeeded() }.toNot(throwError())
             }
             
             it("has to be able to throw error when duplicate experiment is found.") {
@@ -137,10 +131,16 @@ final class NamespaceSpec: QuickSpec {
                     context("when default experiment is not defined") {
                         let logger = MockLogger()
                         let namespace = try! Namespace("ns", unitKeys: keys, inputs: inputs, totalSegments: 10, logger: logger)
-                        try! namespace.defineExperiment(identifier: "expA", serializedScript: StubReader.get("simple-0"), isDefaultExperiment: false)
+                        try! namespace.defineExperiment(identifier: "defA", serializedScript: StubReader.get("simple-0"), isDefaultExperiment: false)
 
-                        it("always returns provided default value") {}
-                        it("should not log any exposure") {}
+                        it("always returns provided default value") {
+                            let result = try! namespace.get("foo", defaultValue: "default")
+                            expect(result) == "default"
+                        }
+
+                        it("should not log any exposure") {
+                            expect(logger.logs.count) == 0
+                        }
                     }
                 }
             }
