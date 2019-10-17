@@ -8,8 +8,8 @@
 
 /// Default segment allocator uses Set-based operation for addition and subtraction.
 struct DefaultSegmentAllocator {
-    typealias SamplerFunction = (_ choices: [Any], _ draws: Int, _ unit: String) -> [Any]?
-    typealias RandomizerFunction = (_ minValue: Int, _ maxValue: Int, _ unit: String) -> Int?
+    typealias SamplerFunction = (_ choices: [Any], _ draws: Int, _ unit: String) throws -> [Any]?
+    typealias RandomizerFunction = (_ minValue: Int, _ maxValue: Int, _ unit: String) throws -> Int?
 
     /// The number of total segments for this allocator.
     let totalSegments: Int
@@ -52,7 +52,7 @@ extension DefaultSegmentAllocator: SegmentAllocator {
     @discardableResult
     mutating func allocate(_ name: String, _ segmentCount: Int) throws -> [Int] {
         // get randomized segment values based on name parameter.
-        guard let segments = sampler(Array(availableSegmentPool).sorted(), segmentCount, name) as? [Int] else {
+        guard let segments = try sampler(Array(availableSegmentPool).sorted(), segmentCount, name) as? [Int] else {
             throw SegmentAllocationError.samplingError
         }
 
@@ -92,9 +92,9 @@ extension DefaultSegmentAllocator: SegmentAllocator {
         allocationMap.removeValue(forKey: name)
     }
 
-    func identifier(forUnit unit: String) -> String? {
+    func identifier(forUnit unit: String) throws -> String? {
         // generate a random number between 0..<totalSegments
-        guard let segment = randomizer(0, totalSegments-1, unit) else {
+        guard let segment = try randomizer(0, totalSegments-1, unit) else {
             return nil
         }
 

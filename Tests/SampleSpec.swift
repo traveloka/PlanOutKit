@@ -105,8 +105,8 @@ final class SampleSpec: QuickSpec {
                     let choices = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                     let draws = 4
 
-                    let array1 = opType.quickEval(choices: choices, draws: draws, unit: "1")! as! [Int]
-                    let array2 = opType.quickEval(choices: choices, draws: draws, unit: "2")! as! [Int]
+                    let array1 = try! opType.quickEval(choices: choices, draws: draws, unit: "1")! as! [Int]
+                    let array2 = try! opType.quickEval(choices: choices, draws: draws, unit: "2")! as! [Int]
 
                     expect(array1) != array2
                 }
@@ -115,8 +115,8 @@ final class SampleSpec: QuickSpec {
                     let choices = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
                     let draws = 4
 
-                    let array1 = opType.quickEval(choices: choices, draws: draws, unit: "1")! as! [Int]
-                    let array2 = opType.quickEval(choices: choices, draws: draws, unit: "1")! as! [Int]
+                    let array1 = try! opType.quickEval(choices: choices, draws: draws, unit: "1")! as! [Int]
+                    let array2 = try! opType.quickEval(choices: choices, draws: draws, unit: "1")! as! [Int]
 
                     expect(array1) == array2
                 }

@@ -57,17 +57,23 @@ final class RandomIntegerSpec: QuickSpec {
 
             describe("Quick eval method") {
                 it("produces different value based on provided unit") {
-                    let x = opType.quickEval(min: 1, max: 1000, unit: "x")!
-                    let y = opType.quickEval(min: 1, max: 1000, unit: "y")!
+                    let x = try! opType.quickEval(min: 1, max: 1000, unit: "x")!
+                    let y = try! opType.quickEval(min: 1, max: 1000, unit: "y")!
 
                     expect(x) != y
                 }
 
                 it("produces equal value if provided unit is the same") {
-                    let x1 = opType.quickEval(min: 1, max: 1000, unit: "x")!
-                    let x2 = opType.quickEval(min: 1, max: 1000, unit: "x")!
+                    let x1 = try! opType.quickEval(min: 1, max: 1000, unit: "x")!
+                    let x2 = try! opType.quickEval(min: 1, max: 1000, unit: "x")!
 
                     expect(x1) == x2
+                }
+
+                it("debug") {
+                    let value: String = "f64fa0499c25757"
+                    let numericHash = Int(value, radix: 16)
+                    print(numericHash)
                 }
             }
 

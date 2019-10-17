@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E69B4CA72801DDED31DC1830 /* libPods-PlanOutKitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 91E75F5E79282FEC3B9009C6 /* libPods-PlanOutKitTests.a */; };
+		44BADF83E96DC85A646CDC41 /* libPods-PlanOutKitTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9122D07F062241AB54EEBF51 /* libPods-PlanOutKitTests.a */; };
 		FE2EFA5F230C63DF00C36162 /* RandomOpAssertions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE2EFA5E230C63DF00C36162 /* RandomOpAssertions.swift */; };
 		FE343E7F231D29E20017E047 /* NamespaceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE343E7E231D29E20017E047 /* NamespaceError.swift */; };
 		FE3C88AC2308760F00C59F7C /* PlanOutOpComparisonExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3C88AB2308760F00C59F7C /* PlanOutOpComparisonExamples.swift */; };
@@ -134,7 +134,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		91E75F5E79282FEC3B9009C6 /* libPods-PlanOutKitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlanOutKitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9122D07F062241AB54EEBF51 /* libPods-PlanOutKitTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-PlanOutKitTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCA3BCBDA3E49C9BF5ABAEA2 /* Pods-PlanOutKitTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanOutKitTests.debug.xcconfig"; path = "Target Support Files/Pods-PlanOutKitTests/Pods-PlanOutKitTests.debug.xcconfig"; sourceTree = "<group>"; };
 		F963FD62205E1C103EC8034A /* Pods-PlanOutKitTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PlanOutKitTests.release.xcconfig"; path = "Target Support Files/Pods-PlanOutKitTests/Pods-PlanOutKitTests.release.xcconfig"; sourceTree = "<group>"; };
 		FE2EFA5E230C63DF00C36162 /* RandomOpAssertions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomOpAssertions.swift; sourceTree = "<group>"; };
@@ -268,7 +268,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FEDAAEDD2306C5E700D0733E /* PlanOutKit.framework in Frameworks */,
-				E69B4CA72801DDED31DC1830 /* libPods-PlanOutKitTests.a in Frameworks */,
+				44BADF83E96DC85A646CDC41 /* libPods-PlanOutKitTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -287,7 +287,7 @@
 		77D8B189F063B184BEFA78C5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				91E75F5E79282FEC3B9009C6 /* libPods-PlanOutKitTests.a */,
+				9122D07F062241AB54EEBF51 /* libPods-PlanOutKitTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1055,6 +1055,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1083,6 +1084,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_BITCODE = NO;
 				GCC_WARN_INHIBIT_ALL_WARNINGS = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/Source/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -1107,6 +1109,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1126,6 +1129,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

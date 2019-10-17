@@ -50,5 +50,5 @@ protocol SegmentAllocator {
     ///
     /// - Parameter unit: The string representing unique unit identifier.
     /// - Returns: The experiment identifier assigned for the experiment.
-    func identifier(forUnit unit: String) -> String?
+    func identifier(forUnit unit: String) throws -> String?
 }

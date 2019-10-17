@@ -35,7 +35,7 @@ extension PlanOutOperation {
         ///   - maxValue: Maximum integer value
         ///   - unit: The primary unit used for hashing
         /// - Returns: Random integer based on hashed value
-        static func quickEval(min minValue: Int, max maxValue: Int, unit: String) -> Int? {
+        static func quickEval(min minValue: Int, max maxValue: Int, unit: String) throws -> Int? {
             let args: [String: Any] = [
                 Keys.min.rawValue: minValue,
                 Keys.max.rawValue: maxValue,
@@ -43,7 +43,9 @@ extension PlanOutOperation {
                 Keys.salt.rawValue: "x" // uses arbitrary string as salt.
             ]
 
-            return try! self.init().execute(args, Interpreter())
+            let operation = self.init()
+
+            return try operation.execute(args, Interpreter())
         }
     }
 }

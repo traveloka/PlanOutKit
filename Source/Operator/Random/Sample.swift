@@ -50,7 +50,7 @@ extension PlanOutOperation {
         ///   - draws: The number of times a choice should be made
         ///   - unit: The primary unit used for hashing
         /// - Returns: Returns an array of randomly selected choices based on hashed unit
-        static func quickEval(choices: [Any], draws: Int, unit: String) -> [Any]? {
+        static func quickEval(choices: [Any], draws: Int, unit: String) throws -> [Any]? {
             let args: [String: Any] = [
                 Keys.choices.rawValue: choices,
                 Keys.draws.rawValue: draws,
@@ -58,7 +58,7 @@ extension PlanOutOperation {
                 Keys.salt.rawValue: "x" // use arbitrary string as salt.
             ]
 
-            return try? self.init().execute(args, Interpreter())
+            return try self.init().execute(args, Interpreter())
         }
     }
 

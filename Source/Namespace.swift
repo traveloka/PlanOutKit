@@ -178,7 +178,7 @@ extension Namespace {
     func assignIfNeeded() throws {
         if isAssigned { return }
 
-        if let experimentId = segmentAllocator.identifier(forUnit: unit.identifier),
+        if let experimentId = try segmentAllocator.identifier(forUnit: unit.identifier),
             let experiment = experiments[experimentId] {
             try experiment.assign(unit, logger: self.logger)
             // assign to a registered experiment.

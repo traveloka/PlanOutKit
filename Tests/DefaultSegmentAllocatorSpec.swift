@@ -35,7 +35,7 @@ final class DefaultSegmentAllocatorSpec: QuickSpec {
                     it("throws if requested segment count is larger than available segments") {
                         var allocator = DefaultSegmentAllocator(totalSegments: 10)
 
-                        expect { try allocator.allocate("foo", 15) }.to(throwError(SegmentAllocationError.samplingError))
+                        expect { try allocator.allocate("foo", 15) }.to(throwError(errorType: OperationError.self))
 
                         expect { try allocator.allocate("foo", segments: Array(0...15)) }.to(throwError(errorType: SegmentAllocationError.self))
                     }
@@ -125,8 +125,8 @@ final class DefaultSegmentAllocatorSpec: QuickSpec {
 
                         (0...9).forEach { try! allocator.allocate(String($0), 1) }
 
-                        let result1 = allocator.identifier(forUnit: "foo")
-                        let result2 = allocator.identifier(forUnit: "foo")
+                        let result1 = try! allocator.identifier(forUnit: "foo")
+                        let result2 = try! allocator.identifier(forUnit: "foo")
 
                         expect(result1).toNot(beNil())
                         expect(result2).toNot(beNil())
@@ -136,7 +136,7 @@ final class DefaultSegmentAllocatorSpec: QuickSpec {
 
                 it("returns nil if there are no identifiers allocated") {
                     let allocator = DefaultSegmentAllocator(totalSegments: 10)
-                    let result1 = allocator.identifier(forUnit: "foo")
+                    let result1 = try! allocator.identifier(forUnit: "foo")
 
                     expect(result1).to(beNil())
                 }
@@ -145,7 +145,7 @@ final class DefaultSegmentAllocatorSpec: QuickSpec {
                     var allocator = DefaultSegmentAllocator(totalSegments: 100)
                     try! allocator.allocate("foo", 1)
 
-                    let result1 = allocator.identifier(forUnit: "foo")
+                    let result1 = try! allocator.identifier(forUnit: "foo")
                     expect(result1).to(beNil())
                 }
 
@@ -154,8 +154,8 @@ final class DefaultSegmentAllocatorSpec: QuickSpec {
 
                     (0...9).forEach { try! allocator.allocate(String($0), 1) }
 
-                    let result1 = allocator.identifier(forUnit: "foo")
-                    let result2 = allocator.identifier(forUnit: "foo")
+                    let result1 = try! allocator.identifier(forUnit: "foo")
+                    let result2 = try! allocator.identifier(forUnit: "foo")
 
                     expect(result1).toNot(beNil())
                     expect(result2).toNot(beNil())
@@ -169,7 +169,7 @@ final class DefaultSegmentAllocatorSpec: QuickSpec {
 
                     let allocator = DefaultSegmentAllocator(totalSegments: 10, randomizer: mockRandomizer)
 
-                    let result1 = allocator.identifier(forUnit: "foo")
+                    let result1 = try! allocator.identifier(forUnit: "foo")
                     expect(result1).to(beNil())
                 }
             }
