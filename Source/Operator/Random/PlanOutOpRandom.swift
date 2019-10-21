@@ -60,7 +60,7 @@ class PlanOutOpRandom<T>: PlanOutOpSimple {
         return try randomExecute()
     }
 
-    func hash(appendedUnit: Any? = nil) throws -> Int {
+    func hash(appendedUnit: Any? = nil) throws -> Int64 {
         // obtain salt
         guard let salt = self.salt else {
             throw OperationError.missingArgs(args: PlanOutOperation.Keys.salt.rawValue, type: self)
@@ -81,7 +81,7 @@ class PlanOutOpRandom<T>: PlanOutOpSimple {
         // - convert hashed hexadecimal string to integer value.
         let baseValue = SaltProvider.generate(values: [salt, unitValue])
         let hashValue = String(baseValue.sha1().prefix(15)) // take the first 15 characters of SHA1.
-        guard let numericHash = Int(hashValue, radix: 16) else {
+        guard let numericHash = Int64(hashValue, radix: 16) else {
             throw OperationError.invalidArgs(expected: "hashable value", got: String(hashValue))
         }
 

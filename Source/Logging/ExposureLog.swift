@@ -17,7 +17,7 @@
 /// https://facebook.github.io/planout/docs/logging.html
 public struct ExposureLog: Encodable {
     public let event: String = "exposure"
-    public let timestampInMs: Int
+    public let timestampInMs: Int64
     public let name: String
     public let salt: String
     public let checksum: String
@@ -40,7 +40,7 @@ public struct ExposureLog: Encodable {
         checksum = experiment.definition.checksum
 
         // Swift TimeInterval are in seconds. Multiply by 1000 to convert to milliseconds.
-        timestampInMs = Int(Date().timeIntervalSince1970 * 1000)
+        timestampInMs = Int64(Date().timeIntervalSince1970 * 1000)
     }
 
     private enum CodingKeys: String, CodingKey {

@@ -35,7 +35,7 @@ extension PlanOutOperation {
             // see also: https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
             var mutableChoices: [Any] = choices
             for (index, _) in mutableChoices.enumerated().reversed() {
-                let randomNumber = try hash(appendedUnit: index) % (index + 1)
+                let randomNumber = Int(try hash(appendedUnit: index) % Int64(index + 1))
                 mutableChoices.swapAt(index, randomNumber)
             }
 

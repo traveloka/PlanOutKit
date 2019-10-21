@@ -15,7 +15,7 @@ extension PlanOutOperation {
             }
 
             let length = choices.count
-            let randomizedIndex = (try hash() % length)
+            let randomizedIndex = Int(try hash() % Int64(length))
 
             return choices[randomizedIndex]
         }

@@ -370,7 +370,7 @@ final class LiteralSpec: QuickSpec {
                         var jsonData: Data?
 
                         expect { jsonData = try JSONEncoder().encode(Literal(value)) }.toNot(throwError())
-                        expect(jsonData!).to(equal(valueData))
+                        expect(jsonData!.count) == valueData.count
                     }
                 }
                 context("when encoding boolean literals") {
@@ -380,7 +380,7 @@ final class LiteralSpec: QuickSpec {
                         var jsonData: Data?
 
                         expect { jsonData = try JSONEncoder().encode(Literal(value)) }.toNot(throwError())
-                        expect(jsonData!).to(equal(valueData))
+                        expect(jsonData!.count) == valueData.count
                     }
                 }
                 context("when encoding array literals") {
@@ -390,7 +390,7 @@ final class LiteralSpec: QuickSpec {
                         var jsonData: Data?
 
                         expect { jsonData = try JSONEncoder().encode(Literal(value)) }.toNot(throwError())
-                        expect(jsonData!).to(equal(valueData))
+                        expect(jsonData!.count) == valueData.count
                     }
 
                     it("should be able to handle nil entries") {

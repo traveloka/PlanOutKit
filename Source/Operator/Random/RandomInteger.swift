@@ -25,7 +25,7 @@ extension PlanOutOperation {
                 throw OperationError.invalidArgs(expected: "min <= max", got: "min: \(minInt) max: \(maxInt)")
             }
 
-            return minInt + (try hash() % (maxInt - minInt + 1))
+            return minInt + Int(try hash() % Int64(maxInt - minInt + 1))
         }
 
         /// Convenience method that runs the operation with only the minimum required arguments.
