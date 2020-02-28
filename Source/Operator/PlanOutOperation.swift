@@ -29,7 +29,7 @@ enum PlanOutOperation: String {
     case mod = "%"
     case divide = "/"
     case round
-    case not = "!"
+    case not
     case negative
     case min
     case max

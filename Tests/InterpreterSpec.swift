@@ -47,5 +47,42 @@ final class InterpreterSpec: QuickSpec {
                 expect { try interpreter.getParams() }.toNot(beNil())
             }
         }
+
+        describe("equality.json") {
+            /**
+             equality.json script:
+             ```
+                if (var == 'foo') { foo = 'result'; }
+                if (var != 'foo') { bar = 'result'; }
+
+             ```
+             */
+            let serialization = StubReader.getDictionary("equality")
+
+            context("given var equals to foo") {
+                let unit = Unit(keys: ["userid"], inputs: ["userid": "12354", "var": "foo"])
+                let interpreter = Interpreter(serialization: serialization, salt: "foo", unit: unit)
+
+                it("assigns result to foo parameter") {
+                    expect { try interpreter.get("foo") as? String } == "result"
+                }
+
+                it("should not assign result to bar parameter") {
+                    expect { try interpreter.get("bar") as? String }.to(beNil())
+                }
+            }
+
+            context("when var is not equal to foo") {
+                let unit = Unit(keys: ["userid"], inputs: ["userid": "12354", "var": "bar"])
+                let interpreter = Interpreter(serialization: serialization, salt: "foo", unit: unit)
+
+                it("should not assign result to foo parameter") {
+                    expect { try interpreter.get("foo") as? String }.to(beNil())
+                }
+                it("assigns result to bar parameter") {
+                    expect { try interpreter.get("bar") as? String } == "result"
+                }
+            }
+        }
     }
 }

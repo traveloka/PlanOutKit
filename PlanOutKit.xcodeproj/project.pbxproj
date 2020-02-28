@@ -60,6 +60,7 @@
 		FE9C44CB231FA0E7001213B2 /* simple-0.json in Resources */ = {isa = PBXBuildFile; fileRef = FE9C44C9231FA0E7001213B2 /* simple-0.json */; };
 		FE9C44CC231FA0E7001213B2 /* simple-1.json in Resources */ = {isa = PBXBuildFile; fileRef = FE9C44CA231FA0E7001213B2 /* simple-1.json */; };
 		FE9C44CE231FCF75001213B2 /* sample.json in Resources */ = {isa = PBXBuildFile; fileRef = FE9C44CD231FCF75001213B2 /* sample.json */; };
+		FEB2C8E4240903E2007D3912 /* equality.json in Resources */ = {isa = PBXBuildFile; fileRef = FEB2C8E3240903E2007D3912 /* equality.json */; };
 		FEDAAEDD2306C5E700D0733E /* PlanOutKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEDAAED32306C5E700D0733E /* PlanOutKit.framework */; };
 		FEDAAEE42306C5E700D0733E /* PlanOutKit.h in Headers */ = {isa = PBXBuildFile; fileRef = FEDAAED62306C5E700D0733E /* PlanOutKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FEDAAF2C2306C7A100D0733E /* SaltProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEDAAEEF2306C7A000D0733E /* SaltProvider.swift */; };
@@ -189,6 +190,7 @@
 		FE9C44C9231FA0E7001213B2 /* simple-0.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "simple-0.json"; sourceTree = "<group>"; };
 		FE9C44CA231FA0E7001213B2 /* simple-1.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "simple-1.json"; sourceTree = "<group>"; };
 		FE9C44CD231FCF75001213B2 /* sample.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = sample.json; sourceTree = "<group>"; };
+		FEB2C8E3240903E2007D3912 /* equality.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = equality.json; sourceTree = "<group>"; };
 		FEDAAED32306C5E700D0733E /* PlanOutKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PlanOutKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FEDAAED62306C5E700D0733E /* PlanOutKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PlanOutKit.h; sourceTree = "<group>"; };
 		FEDAAED72306C5E700D0733E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -418,6 +420,7 @@
 				FE9C44CD231FCF75001213B2 /* sample.json */,
 				FE9C44C9231FA0E7001213B2 /* simple-0.json */,
 				FE9C44CA231FA0E7001213B2 /* simple-1.json */,
+				FEB2C8E3240903E2007D3912 /* equality.json */,
 			);
 			path = Stubs;
 			sourceTree = "<group>";
@@ -759,6 +762,7 @@
 				FE9C44CB231FA0E7001213B2 /* simple-0.json in Resources */,
 				FE9C44CC231FA0E7001213B2 /* simple-1.json in Resources */,
 				FE9C44CE231FCF75001213B2 /* sample.json in Resources */,
+				FEB2C8E4240903E2007D3912 /* equality.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
