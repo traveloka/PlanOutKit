@@ -6,6 +6,7 @@
 //  Copyright © 2019 Traveloka. All rights reserved.
 //
 
+import Foundation
 
 /// Represents log data of unit exposure to an experiment.
 ///

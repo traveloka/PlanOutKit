@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |spec|
   spec.name         = "PlanOutKit"
-  spec.version      = "0.1.3"
+  spec.version      = "0.1.4"
   spec.summary      = "PlanOut interpreter implementation in Swift."
   spec.description  = <<-DESC
     A Swift implementation of PlanOut interpreter, for Swift or Objective-C backed front-ends. The implementation (tries to) follow standards defined by the Python implementation of PlanOut interpreter and also its Java implementation (planout4j).

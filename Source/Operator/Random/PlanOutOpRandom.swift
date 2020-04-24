@@ -7,6 +7,7 @@
 //
 
 import CommonCrypto
+import Foundation
 
 class PlanOutOpRandom<T>: PlanOutOpSimple {
     typealias ResultType = T
